@@ -14,9 +14,12 @@
             --color-accent: #E84A27;
             --color-accent-glow: #FF6B47;
             --color-secondary: #00B8A9;
+            --color-blue: #1A73E8;
+            --color-blue-light: #4285F4;
             --color-gold: #FFB830;
-            --color-dark: #0A0E17;
-            --color-light: #F7F9FC;
+            --color-dark: #1A1A1A;
+            --color-black: #000000;
+            --color-light: #FFFFFF;
             --color-white: #FFFFFF;
             --color-gray: #64748B;
             --color-gray-light: #E2E8F0;
@@ -40,15 +43,14 @@
         
         body {
             font-family: 'IBM Plex Sans Arabic', sans-serif;
-            background: var(--color-light);
-            color: var(--color-dark);
+            background: var(--color-white);
+            color: var(--color-black);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
         }
@@ -87,22 +89,25 @@
             text-decoration: none;
         }
 
+        /* Logo Container */
         .brand-logo {
-            width: 56px;
+            width: 52px;
             height: 56px;
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-glow) 100%);
-            border-radius: 14px;
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 8px 24px rgba(232, 74, 39, 0.25);
             transition: var(--transition);
+        }
+        
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .brand:hover .brand-logo {
-            transform: rotate(-5deg) scale(1.05);
-            box-shadow: 0 12px 32px rgba(232, 74, 39, 0.35);
+            transform: scale(1.05);
         }
 
         .brand-text {
@@ -163,28 +168,27 @@
         }
 
         .nav-cta {
-            background: var(--color-accent);
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
             color: var(--color-white);
             padding: 14px 32px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
-            box-shadow: 0 4px 16px rgba(232, 74, 39, 0.25);
+            box-shadow: 0 4px 16px rgba(26, 115, 232, 0.3);
             transition: var(--transition);
         }
 
         .nav-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(232, 74, 39, 0.35);
-            background: var(--color-accent-glow);
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.4);
         }
 
         /* Hero Section */
         .hero {
             position: relative;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0B1F3F 0%, #1A3B6B 50%, #0B1F3F 100%);
+            background: var(--color-white);
             margin-top: 90px;
             display: flex;
             align-items: center;
@@ -199,8 +203,8 @@
             right: 0;
             bottom: 0;
             background: 
-                radial-gradient(circle at 15% 20%, rgba(232, 74, 39, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(0, 184, 169, 0.06) 0%, transparent 40%);
+                radial-gradient(circle at 15% 20%, rgba(26, 115, 232, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(0, 184, 169, 0.03) 0%, transparent 40%);
             pointer-events: none;
         }
 
@@ -211,8 +215,8 @@
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
             background-size: 60px 60px;
             opacity: 0.4;
         }
@@ -237,15 +241,14 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 184, 48, 0.15);
-            border: 1px solid rgba(255, 184, 48, 0.3);
+            background: rgba(26, 115, 232, 0.08);
+            border: 1px solid rgba(26, 115, 232, 0.2);
             padding: 8px 20px;
             border-radius: 50px;
-            color: var(--color-gold);
+            color: var(--color-blue);
             font-size: 13px;
             font-weight: 600;
             margin-bottom: 32px;
-            backdrop-filter: blur(10px);
         }
 
         .hero-badge::before {
@@ -257,14 +260,14 @@
             font-family: 'Almarai', sans-serif;
             font-size: 72px;
             font-weight: 800;
-            color: var(--color-white);
+            color: var(--color-black);
             line-height: 1.1;
             letter-spacing: -2px;
             margin-bottom: 24px;
         }
 
         .hero-title .highlight {
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-glow) 100%);
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -274,7 +277,7 @@
         .hero-description {
             font-size: 20px;
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(0, 0, 0, 0.7);
             margin-bottom: 48px;
             max-width: 580px;
         }
@@ -287,9 +290,8 @@
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(26, 115, 232, 0.05);
+            border: 1px solid rgba(26, 115, 232, 0.15);
             border-radius: 16px;
             padding: 24px;
             text-align: center;
@@ -297,16 +299,17 @@
         }
 
         .stat-card:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(26, 115, 232, 0.08);
             transform: translateY(-4px);
-            border-color: rgba(255, 184, 48, 0.3);
+            border-color: rgba(26, 115, 232, 0.3);
+            box-shadow: var(--shadow-md);
         }
 
         .stat-number {
             font-family: 'Almarai', sans-serif;
             font-size: 42px;
             font-weight: 700;
-            color: var(--color-accent-glow);
+            color: var(--color-blue);
             line-height: 1;
             margin-bottom: 8px;
             display: block;
@@ -314,7 +317,7 @@
 
         .stat-label {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.75);
+            color: rgba(0, 0, 0, 0.7);
             font-weight: 500;
         }
 
@@ -322,17 +325,63 @@
             display: flex;
             gap: 20px;
             align-items: center;
+            margin-bottom: 48px;
+        }
+
+        /* Partners Section */
+        .partners-section {
+            padding: 60px 80px;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-gray-light);
+        }
+
+        .partners-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .partners-title {
+            font-size: 14px;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+
+        .partners-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .partner-logo {
+            font-size: 16px;
+            color: var(--color-gray);
+            font-weight: 600;
+            padding: 12px 24px;
+            background: #F8F9FA;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .partner-logo:hover {
+            color: var(--color-blue);
+            background: rgba(26, 115, 232, 0.05);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-glow) 100%);
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
             color: var(--color-white);
             padding: 18px 40px;
             border-radius: 12px;
             text-decoration: none;
             font-size: 17px;
             font-weight: 700;
-            box-shadow: 0 12px 32px rgba(232, 74, 39, 0.3);
+            box-shadow: 0 12px 32px rgba(26, 115, 232, 0.3);
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
@@ -341,25 +390,24 @@
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 16px 48px rgba(232, 74, 39, 0.4);
+            box-shadow: 0 16px 48px rgba(26, 115, 232, 0.4);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--color-white);
+            background: var(--color-white);
+            color: var(--color-blue);
             padding: 18px 40px;
             border-radius: 12px;
             text-decoration: none;
             font-size: 17px;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--color-blue);
             transition: var(--transition);
-            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: var(--color-blue);
+            color: var(--color-white);
         }
 
         /* Hero Visual */
@@ -392,7 +440,7 @@
             transform: translate(-50%, -50%);
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(232, 74, 39, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(26, 115, 232, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             filter: blur(60px);
             animation: pulse 4s ease-in-out infinite;
@@ -413,7 +461,7 @@
         .feature-badge-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-glow) 100%);
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -423,7 +471,7 @@
 
         .feature-badge-text {
             font-weight: 700;
-            color: var(--color-primary);
+            color: var(--color-black);
             font-size: 15px;
         }
 
@@ -448,7 +496,7 @@
         /* Categories Section */
         .categories-section {
             padding: 140px 80px;
-            background: var(--color-light);
+            background: #F8F9FA;
             position: relative;
         }
 
@@ -460,7 +508,7 @@
 
         .section-label {
             display: inline-block;
-            color: var(--color-accent);
+            color: var(--color-blue);
             font-size: 14px;
             font-weight: 700;
             letter-spacing: 2px;
@@ -472,7 +520,7 @@
             font-family: 'Almarai', sans-serif;
             font-size: 56px;
             font-weight: 800;
-            color: var(--color-primary);
+            color: var(--color-black);
             line-height: 1.2;
             letter-spacing: -1.5px;
             margin-bottom: 24px;
@@ -510,7 +558,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-glow) 100%);
+            background: linear-gradient(90deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.5s ease;
@@ -519,7 +567,7 @@
         .category-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
-            border-color: rgba(232, 74, 39, 0.2);
+            border-color: rgba(26, 115, 232, 0.3);
         }
 
         .category-card:hover::before {
@@ -551,7 +599,7 @@
             font-family: 'Almarai', sans-serif;
             font-size: 24px;
             font-weight: 700;
-            color: var(--color-primary);
+            color: var(--color-black);
             margin-bottom: 8px;
             line-height: 1.3;
         }
@@ -594,19 +642,910 @@
         }
 
         .category-message {
-            background: linear-gradient(135deg, rgba(232, 74, 39, 0.05) 0%, rgba(0, 184, 169, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(26, 115, 232, 0.05) 0%, rgba(0, 184, 169, 0.05) 100%);
             padding: 24px;
             border-radius: 16px;
-            border-right: 4px solid var(--color-accent);
+            border-right: 4px solid var(--color-blue);
         }
 
         .category-message p {
-            color: var(--color-primary);
+            color: var(--color-black);
             font-weight: 600;
             font-size: 16px;
             line-height: 1.6;
             font-style: italic;
             margin: 0;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 140px 80px;
+            background: var(--color-white);
+        }
+
+        .products-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .products-container.single-product {
+            grid-template-columns: 1fr;
+            max-width: 800px;
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border: 2px solid var(--color-gray-light);
+            border-radius: 24px;
+            padding: 48px 32px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card.featured {
+            border-color: var(--color-blue);
+            box-shadow: 0 12px 40px rgba(26, 115, 232, 0.15);
+        }
+
+        .single-product .product-card {
+            transform: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .currency-selector {
+            margin: 24px 0;
+            padding: 20px;
+            background: #F8F9FA;
+            border-radius: 12px;
+        }
+
+        .currency-selector label {
+            display: block;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .currency-selector select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--color-gray-light);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background: var(--color-white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .currency-selector select:focus {
+            outline: none;
+            border-color: var(--color-blue);
+        }
+
+        .features-title {
+            font-family: 'Almarai', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin: 24px 0 16px;
+            text-align: right;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 32px;
+            text-align: right;
+        }
+
+        .product-features li {
+            padding: 16px;
+            color: #475569;
+            font-size: 15px;
+            border-bottom: 1px solid var(--color-gray-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .product-features strong {
+            color: var(--color-black);
+        }
+
+        .additional-features {
+            background: linear-gradient(135deg, rgba(26, 115, 232, 0.05) 0%, rgba(0, 184, 169, 0.05) 100%);
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: right;
+        }
+
+        .additional-features h4 {
+            font-family: 'Almarai', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 16px;
+        }
+
+        .additional-features ul {
+            list-style: none;
+        }
+
+        .additional-features li {
+            padding: 8px 0;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .additional-features li::before {
+            content: '✓';
+            color: var(--color-secondary);
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* Offer Banner */
+        .offer-banner {
+            margin-top: 32px;
+            padding: 24px;
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 8px 24px rgba(255, 165, 0, 0.3);
+        }
+
+        .offer-icon {
+            font-size: 48px;
+            flex-shrink: 0;
+        }
+
+        .offer-content {
+            flex: 1;
+            color: var(--color-white);
+        }
+
+        .offer-content strong {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .offer-content p {
+            font-size: 14px;
+            margin-bottom: 16px;
+            opacity: 0.95;
+        }
+
+        .countdown {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-value {
+            font-size: 24px;
+            font-weight: 800;
+            font-family: 'Almarai', sans-serif;
+        }
+
+        .countdown-label {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .countdown-separator {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--color-blue);
+            color: var(--color-white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .product-badge.recommended {
+            background: linear-gradient(135deg, var(--color-gold) 0%, #FFA500 100%);
+        }
+
+        .product-badge.premium {
+            background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+        }
+
+        .product-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+
+        .product-name {
+            font-family: 'Almarai', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-black);
+            margin-bottom: 12px;
+        }
+
+        .product-sensors {
+            font-size: 16px;
+            color: var(--color-blue);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .product-price {
+            margin-bottom: 32px;
+        }
+
+        .price-amount {
+            font-family: 'Almarai', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--color-blue);
+        }
+
+        .price-currency {
+            font-size: 20px;
+            color: var(--color-gray);
+            margin-right: 8px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 32px;
+            text-align: right;
+        }
+
+        .product-features li {
+            padding: 12px 0;
+            color: #475569;
+            font-size: 15px;
+            border-bottom: 1px solid var(--color-gray-light);
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            color: var(--color-secondary);
+            font-weight: 700;
+            margin-left: 12px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
+            color: var(--color-white);
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.3);
+        }
+
+        /* Shopping Cart */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .cart-overlay.active {
+            display: flex;
+        }
+
+        .cart-modal {
+            background: var(--color-white);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cart-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--color-gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-family: 'Almarai', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--color-black);
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: var(--color-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .cart-close:hover {
+            background: var(--color-gray-light);
+            color: var(--color-black);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 32px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .cart-empty p {
+            color: var(--color-gray);
+            font-size: 18px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #F8F9FA;
+            border-radius: 16px;
+            margin-bottom: 16px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            color: var(--color-blue);
+            font-weight: 600;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--color-blue);
+            background: var(--color-white);
+            color: var(--color-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--color-blue);
+            color: var(--color-white);
+        }
+
+        .qty-number {
+            font-weight: 700;
+            color: var(--color-black);
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .remove-item {
+            color: #EF4444;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .cart-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--color-gray-light);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .cart-total span:first-child {
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        .total-amount {
+            font-family: 'Almarai', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-blue);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
+            color: var(--color-white);
+            padding: 18px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Floating Cart Button */
+        .floating-cart-btn {
+            position: fixed;
+            top: 100px;
+            left: 32px;
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
+            border: none;
+            border-radius: 50%;
+            color: var(--color-white);
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.3);
+            transition: var(--transition);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .floating-cart-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(26, 115, 232, 0.4);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #EF4444;
+            color: var(--color-white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--color-white);
+        }
+
+        .cart-count.hidden {
+            display: none;
+        }
+
+        /* Sticky Buy Bar */
+        .sticky-buy-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 998;
+            transform: translateY(100%);
+            transition: var(--transition);
+            border-top: 2px solid var(--color-blue);
+        }
+
+        .sticky-buy-bar.visible {
+            transform: translateY(0);
+        }
+
+        .sticky-buy-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 16px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sticky-product-info strong {
+            display: block;
+            font-size: 16px;
+            color: var(--color-black);
+            margin-bottom: 4px;
+        }
+
+        .sticky-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--color-blue);
+            font-family: 'Almarai', sans-serif;
+        }
+
+        .sticky-buy-btn {
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
+            color: var(--color-white);
+            padding: 14px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sticky-buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.3);
+        }
+
+        /* Checkout Form */
+        .checkout-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .checkout-overlay.active {
+            display: flex;
+        }
+
+        .checkout-modal {
+            background: var(--color-white);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp 0.3s ease;
+        }
+
+        .checkout-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--color-gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: var(--color-white);
+            z-index: 10;
+        }
+
+        .checkout-header h3 {
+            font-family: 'Almarai', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--color-black);
+        }
+
+        .checkout-close {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: var(--color-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .checkout-close:hover {
+            background: var(--color-gray-light);
+            color: var(--color-black);
+        }
+
+        .checkout-form {
+            padding: 32px;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section h4 {
+            font-family: 'Almarai', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--color-blue);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--color-gray-light);
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .payment-option {
+            cursor: pointer;
+        }
+
+        .payment-option input {
+            display: none;
+        }
+
+        .payment-card {
+            padding: 20px;
+            border: 2px solid var(--color-gray-light);
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            background: var(--color-white);
+        }
+
+        .payment-option input:checked + .payment-card {
+            border-color: var(--color-blue);
+            background: rgba(26, 115, 232, 0.05);
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.15);
+        }
+
+        .payment-card:hover {
+            border-color: var(--color-blue);
+        }
+
+        .payment-icon {
+            display: block;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .payment-name {
+            display: block;
+            font-weight: 600;
+            color: var(--color-black);
+            font-size: 14px;
+        }
+
+        .order-summary {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-gray-light);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item-name {
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        .summary-item-details {
+            color: var(--color-gray);
+            font-size: 14px;
+        }
+
+        .summary-item-price {
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(26, 115, 232, 0.05) 0%, rgba(0, 184, 169, 0.05) 100%);
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .order-total span:first-child {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-black);
+        }
+
+        .final-total {
+            font-family: 'Almarai', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--color-blue);
+        }
+
+        .submit-order-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: var(--color-white);
+            padding: 18px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .submit-order-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
         }
 
         /* Features Section */
@@ -631,7 +1570,7 @@
         }
 
         .feature-item:hover {
-            background: var(--color-light);
+            background: #F8F9FA;
             transform: translateY(-4px);
         }
 
@@ -658,7 +1597,7 @@
             font-family: 'Almarai', sans-serif;
             font-size: 22px;
             font-weight: 700;
-            color: var(--color-primary);
+            color: var(--color-black);
             margin-bottom: 16px;
         }
 
@@ -666,6 +1605,132 @@
             font-size: 16px;
             color: var(--color-gray);
             line-height: 1.7;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 140px 80px;
+            background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+        }
+
+        .testimonials-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .testimonial-card {
+            background: var(--color-white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--color-gray-light);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stars {
+            color: #FFA500;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #475569;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-info strong {
+            display: block;
+            font-size: 16px;
+            color: var(--color-black);
+            margin-bottom: 4px;
+        }
+
+        .author-info span {
+            font-size: 14px;
+            color: var(--color-gray);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 140px 80px;
+            background: var(--color-white);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--color-gray-light);
+            margin-bottom: 0;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 24px 0;
+            background: none;
+            border: none;
+            text-align: right;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-black);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        .faq-question:hover {
+            color: var(--color-blue);
+        }
+
+        .faq-icon {
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--color-blue);
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding-bottom: 24px;
+        }
+
+        .faq-answer p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #475569;
+            margin: 0;
         }
 
         /* CTA Section */
@@ -891,6 +1956,11 @@
                 display: none;
             }
 
+            .brand-logo {
+                width: 40px;
+                height: 56px;
+            }
+
             .hero-title {
                 font-size: 42px;
             }
@@ -911,10 +1981,115 @@
                 font-size: 36px;
             }
 
+            .partners-section {
+                padding: 40px 20px;
+            }
+
+            .partners-logos {
+                gap: 16px;
+            }
+
+            .partner-logo {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .testimonials-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .faq-section {
+                padding: 80px 20px;
+            }
+
+            .faq-question {
+                font-size: 16px;
+                padding: 20px 0;
+            }
+
+            .offer-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .countdown {
+                justify-content: center;
+            }
+
+            .sticky-buy-content {
+                padding: 12px 20px;
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .sticky-product-info strong {
+                font-size: 14px;
+            }
+
+            .sticky-price {
+                font-size: 20px;
+            }
+
+            .sticky-buy-btn {
+                width: 100%;
+                padding: 12px 32px;
+            }
+
+            .products-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .products-container.single-product {
+                padding: 0 20px;
+            }
+
+            .product-card.featured {
+                transform: scale(1);
+            }
+
+            .floating-cart-btn {
+                width: 56px;
+                height: 56px;
+                top: 80px;
+                left: 16px;
+                font-size: 24px;
+            }
+
+            .cart-modal {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .cart-header, .cart-items, .cart-footer {
+                padding: 20px;
+            }
+
+            .checkout-modal {
+                width: 95%;
+                margin: 0;
+            }
+
+            .checkout-form {
+                padding: 20px;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-card {
+                padding: 16px;
+            }
+
             .footer-top {
                 grid-template-columns: 1fr;
             }
         }
+
+
     </style>
 </head>
 <body>
@@ -922,7 +2097,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="brand">
-                <div class="brand-logo">🛡️</div>
+                <div class="brand-logo">
+                    <img src="data:image/png;base64,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" alt="AmnTech Logo">
+                </div>
                 <div class="brand-text">
                     <span class="brand-name">AmnTech</span>
                     <span class="brand-tagline">Smart Safety Solutions</span>
@@ -931,10 +2108,9 @@
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#categories">العملاء</a></li>
+                <li><a href="#products">المنتج</a></li>
                 <li><a href="#features">المزايا</a></li>
-                <li><a href="#about">من نحن</a></li>
             </ul>
-            <a href="#contact" class="nav-cta">تواصل معنا</a>
         </div>
     </nav>
 
@@ -943,18 +2119,18 @@
         <div class="hero-grid-pattern"></div>
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge">تقنية عمانية مبتكرة </div>
+                <div class="hero-badge">تقنية عمانية مبتكرة</div>
                 <h1 class="hero-title">
                     السترة <span class="highlight">الذكية</span><br>
                     للسلامة المهنية
                 </h1>
                 <p class="hero-description">
-                    نعيد تعريف معايير السلامة في بيئات العمل من خلال دمج تقنيات متطورة بين السنسرات الذكية وأنظمة التنبيه الفورية لحماية العمال وتقليل الحوادث بشكل جذري .
+في AmnTech  نطور حلول السلامة الذكية تخدم مختلف فئات المجتمع منتجنا الرئيسي , سترة السلامة الذكية , صُممت لحماية العمال في مواقع العمل الخطرة , وتكون أداة تعليمية عملية للـ طلاب في برامج التدريب والدراسة , كما يوفر الأمان والراحة لـ أصحاب الإبل والأغنام عند خروجهم ليلاً , هدفنا رفع الوعي بالمخاطر و تقليل الحوادث ، وتقديم منتج عملي ومريح يناسب الجميع .
                 </p>
 
                 <div class="hero-stats">
                     <div class="stat-card">
-                        <span class="stat-number">95%</span>
+                        <span class="stat-number">90%</span>
                         <span class="stat-label">تقليل الحوادث</span>
                     </div>
                     <div class="stat-card">
@@ -962,14 +2138,14 @@
                         <span class="stat-label">زيادة الوعي</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-number">85%</span>
+                        <span class="stat-number">90%</span>
                         <span class="stat-label">راحة الاستخدام</span>
                     </div>
                 </div>
 
                 <div class="hero-buttons">
-                    <a href="#categories" class="btn-primary">
-                        اكتشف الحلول
+                    <a href="#products" class="btn-primary">
+                        اطلب الآن
                         <span>←</span>
                     </a>
                     <a href="#features" class="btn-secondary">المزايا التقنية</a>
@@ -999,19 +2175,16 @@
                                 </filter>
                             </defs>
                             
-                            <!-- Vest Body -->
                             <path d="M 100 100 L 80 200 L 80 450 L 170 450 L 170 250 L 230 250 L 230 450 L 320 450 L 320 200 L 300 100 L 250 120 L 200 80 L 150 120 Z" 
                                   fill="url(#vestMain)" 
                                   stroke="#0B1F3F" 
                                   stroke-width="3"
                                   filter="url(#glow)"/>
                             
-                            <!-- Reflective Stripes -->
                             <rect x="70" y="180" width="260" height="22" rx="4" fill="url(#reflective)" opacity="0.95"/>
                             <rect x="70" y="280" width="260" height="22" rx="4" fill="url(#reflective)" opacity="0.95"/>
                             <rect x="70" y="380" width="260" height="22" rx="4" fill="url(#reflective)" opacity="0.95"/>
                             
-                            <!-- Smart Sensors -->
                             <g filter="url(#glow)">
                                 <circle cx="150" cy="150" r="14" fill="#00B8A9" stroke="#0B1F3F" stroke-width="2"/>
                                 <circle cx="250" cy="150" r="14" fill="#00B8A9" stroke="#0B1F3F" stroke-width="2"/>
@@ -1019,7 +2192,6 @@
                                 <circle cx="280" cy="250" r="12" fill="#00B8A9" stroke="#0B1F3F" stroke-width="2"/>
                             </g>
                             
-                            <!-- Signal Waves Animation -->
                             <g opacity="0.7">
                                 <path d="M 150 150 Q 180 125 210 150" stroke="#00B8A9" stroke-width="2.5" fill="none">
                                     <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
@@ -1032,7 +2204,6 @@
                                 </path>
                             </g>
                             
-                            <!-- AI Chip -->
                             <g>
                                 <rect x="175" y="195" width="50" height="35" rx="6" fill="#0B1F3F" opacity="0.9"/>
                                 <text x="200" y="217" text-anchor="middle" fill="#FFB830" font-size="18" font-weight="bold">AI</text>
@@ -1047,7 +2218,6 @@
                                 </circle>
                             </g>
 
-                            <!-- Pockets Detail -->
                             <rect x="90" y="340" width="60" height="70" rx="4" fill="none" stroke="#0B1F3F" stroke-width="2" opacity="0.5"/>
                             <rect x="250" y="340" width="60" height="70" rx="4" fill="none" stroke="#0B1F3F" stroke-width="2" opacity="0.5"/>
                         </svg>
@@ -1066,6 +2236,20 @@
                         <span class="feature-badge-text">استجابة فورية</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners/Certifications Section -->
+    <section class="partners-section">
+        <div class="partners-container">
+            <p class="partners-title">موثوق به من قبل الشركات الرائدة</p>
+            <div class="partners-logos">
+                <div class="partner-logo">🏭 أرامكو</div>
+                <div class="partner-logo">🏗️ شركة تنمية نفط عمان</div>
+                <div class="partner-logo">⚡OQ</div>
+                <div class="partner-logo">🛢أ وربك</div>
+                <div class="partner-logo">🏛️ شركة الغاز العمانية</div>
             </div>
         </div>
     </section>
@@ -1091,11 +2275,12 @@
                     </div>
                 </div>
                 <p class="category-description">
-                    مواقع البناء تمثل أكبر نسبة خطورة في حوادث العمل , AmnTech توفر حلولاً ذكية لتقليل المخاطر وحماية العمال في مثل هذه البيئات . 
+مواقع البناء تمثل أكبر نسبة من حوادث العمل ويتم توفير حلولاً ذكية لتقليل المخاطر وحماية العمال في بيئات العمل الأكثر تحدياً .
+                </p>
                 <ul class="category-benefits">
                     <li>تقليل الإصابات ورفع مستوى السلامة بشكل ملموس</li>
                     <li>معالجة احتياجات السلامة المباشرة للعمال</li>
-                    <li>إثبات تقليل الحوادث بنسبة 95% من المشاركين </li>
+                    <li>إثبات تقليل الحوادث بنسبة 90% من المشاركين</li>
                     <li>نظام تنبيه فوري عند اكتشاف أي خطر محتمل</li>
                 </ul>
                 <div class="category-message">
@@ -1113,12 +2298,11 @@
                     </div>
                 </div>
                 <p class="category-description">
-                      
-في قطاع النفط والغاز حيث المخاطر مضاعفة تصبح السترة الذكية ضرورة ليس خياراً , تقنية متقدمة لحماية استثنائية . 
+في صناعات النفط والغاز حيث المخاطر مضاعفة , تصبح السترة الذكية ضرورة لا خياراً تقنية متقدمة لحماية استثنائية .
                 </p>
                 <ul class="category-benefits">
                     <li>ميزانيات مخصصة للاستثمار في معدات السلامة الذكية</li>
-                    <li>تعزيز وعي العامل بالمخاطر المحيطة بنسبة 90% </li>
+                    <li>تعزيز وعي العامل بالمخاطر المحيطة بنسبة 90%</li>
                     <li>حلول مصممة للبيئات الخطرة والظروف القاسية</li>
                     <li>مراقبة مستمرة للحالة الصحية أثناء العمل</li>
                 </ul>
@@ -1137,11 +2321,11 @@
                     </div>
                 </div>
                 <p class="category-description">
-                    مصانع الحديد والصلب، شركات التعدين والطاقة تحتاج لحلول تجمع بين المتانة والراحة والتقنية الذكية.
+مصانع الحديد والمنتجات الصلبة , شركات التعدين والطاقة تحتاج لحلول تجمع بين المتانة والراحة والتقنية الذكية .
                 </p>
                 <ul class="category-benefits">
                     <li>حلول ذكية لمراقبة سلامة العمال بشكل يومي</li>
-                    <li>راحة عالية أثناء الاستخدام بنسبة رضا 72.7%</li>
+                    <li>راحة عالية أثناء الاستخدام بنسبة رضا 85%</li>
                     <li>متانة استثنائية تناسب البيئات الصناعية الصعبة</li>
                     <li>مقاومة للحرارة والأتربة والمواد الكيميائية</li>
                 </ul>
@@ -1160,7 +2344,7 @@
                     </div>
                 </div>
                 <p class="category-description">
-                    مشاريع البنية التحتية والطرق تتطلب أعلى معايير السلامة. نساهم في تحقيق رؤية المملكة للتنمية المستدامة.
+                    مشاريع البنية التحتية والطرق تتطلب أعلى معايير السلامة و تساهم في تحقيق رؤية السلطنة في التنمية المستدامة .
                 </p>
                 <ul class="category-benefits">
                     <li>حلول مبتكرة تدعم أهداف التنمية المستدامة</li>
@@ -1183,7 +2367,7 @@
                     </div>
                 </div>
                 <p class="category-description">
-                    شركاء استراتيجيون في توفير خدمات السلامة المهنية. السترة الذكية تعزز خدماتكم الاستشارية والتدريبية.
+                    شركاء استراتيجيون في توفير خدمات السلامة المهنية للسترة الذكية و تعزز الخدمات الاستشارية والتدريبية .
                 </p>
                 <ul class="category-benefits">
                     <li>وسيط فعال لتوصيل المنتج لعملاء متعددين</li>
@@ -1206,7 +2390,7 @@
                     </div>
                 </div>
                 <p class="category-description">
-                    معاهد تدريب العمال والفنيين تستطيع استخدام السترة الذكية كأداة تعليمية عملية لغرس ثقافة السلامة.
+                    معاهد تدريب العمال والفنيين تستطيع استخدام السترة الذكية كأداة تعليمية عملية لغرس ثقافة السلامة .
                 </p>
                 <ul class="category-benefits">
                     <li>أداة تعليمية عملية في برامج السلامة المهنية</li>
@@ -1229,7 +2413,7 @@
                     </div>
                 </div>
                 <p class="category-description">
-                    التنقل ليلاً مع الإبل والأغنام يحمل مخاطر خفية. السترة الذكية توفر حماية وتنبيه في أحلك الأوقات.
+                    التنقل ليلاً مع الإبل والأغنام يحمل مخاطر خفية , السترة الذكية توفر حماية وتنبيه في جميع الأوقات .
                 </p>
                 <ul class="category-benefits">
                     <li>تقليل مخاطر الحوادث الناتجة عن ضعف الرؤية ليلاً</li>
@@ -1250,7 +2434,7 @@
             <span class="section-label">المزايا التقنية</span>
             <h2 class="section-title">لماذا السترة الذكية من AmnTech؟</h2>
             <p class="section-description">
-                تقنية متطورة وميزات فريدة تجعلنا الخيار الأول للسلامة المهنية
+                تقنية متطورة ومميزات فريدة تجعلنا الخيار الأول للسلامة المهنية
             </p>
         </div>
 
@@ -1258,7 +2442,7 @@
             <div class="feature-item">
                 <div class="feature-icon-wrapper">🎯</div>
                 <h3>دقة عالية في الكشف</h3>
-                <p>سنسورات متطورة توفر دقة استثنائية في اكتشاف المخاطر المحيطة والتنبيه الفوري للعامل والمشرف</p>
+                <p>سنسرات متطورة توفر دقة استثنائية في اكتشاف المخاطر المحيطة والتنبيه الفوري للعامل والمشرف</p>
             </div>
 
             <div class="feature-item">
@@ -1293,6 +2477,312 @@
         </div>
     </section>
 
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="section-header">
+            <span class="section-label">المنتج</span>
+            <h2 class="section-title">السترة الذكية للسلامة المهنية</h2>
+            <p class="section-description">
+                حماية شاملة مع تقنيات متقدمة لضمان سلامتك في بيئة العمل
+            </p>
+        </div>
+
+        <div class="products-container single-product">
+            <!-- Single Product -->
+            <div class="product-card featured">
+                <div class="product-badge">الباقة الأساسية</div>
+                <div class="product-icon">🛡️</div>
+                <h3 class="product-name">السترة الذكية الأساسية</h3>
+                <p class="product-sensors">6 تقنيات حماية متقدمة</p>
+                <div class="product-price">
+                    <span class="price-amount" id="productPrice">40</span>
+                    <span class="price-currency" id="priceCurrency">ر.ع</span>
+                </div>
+                
+                <div class="currency-selector">
+                    <label>اختر العملة:</label>
+                    <select id="currencySelect">
+                        <option value="OMR" data-symbol="ر.ع" data-rate="1">الريال العماني (OMR)</option>
+                        <option value="SAR" data-symbol="ريال" data-rate="10">الريال السعودي (SAR)</option>
+                        <option value="AED" data-symbol="درهم" data-rate="9.5">الدرهم الإماراتي (AED)</option>
+                        <option value="USD" data-symbol="$" data-rate="2.6">الدولار الأمريكي (USD)</option>
+                        <option value="EUR" data-symbol="€" data-rate="2.4">اليورو (EUR)</option>
+                    </select>
+                </div>
+
+                <h4 class="features-title">المميزات والسنسورات:</h4>
+                <ul class="product-features">
+                    <li>
+                        <span class="feature-icon">💨</span>
+                        <strong>سنسر الغاز</strong> - كشف تسرب الغازات الخطرة
+                    </li>
+                    <li>
+                        <span class="feature-icon">☀️</span>
+                        <strong>سنسر الأشعة فوق البنفسجية</strong> - حماية من أشعة الشمس الضارة
+                    </li>
+                    <li>
+                        <span class="feature-icon">❤️</span>
+                        <strong>سنسر نبضات القلب</strong> - مراقبة الحالة الصحية
+                    </li>
+                    <li>
+                        <span class="feature-icon">🌡️</span>
+                        <strong>سنسر الحرارة</strong> - قياس درجة حرارة الجسم والبيئة
+                    </li>
+                    <li>
+                        <span class="feature-icon">💧</span>
+                        <strong>سنسر الرطوبة</strong> - مراقبة مستويات الرطوبة
+                    </li>
+                    <li>
+                        <span class="feature-icon">🆘</span>
+                        <strong>زر الطوارئ SOS</strong> - إرسال إشعار فوري عند الخطر
+                    </li>
+                </ul>
+
+                <div class="additional-features">
+                    <h4>مميزات إضافية:</h4>
+                    <ul>
+                        <li>تنبيهات صوتية وضوئية فورية</li>
+                        <li>مقاومة للماء والغبار IP67</li>
+                        <li>بطارية تدوم حتى 12 ساعة</li>
+                        <li>اتصال لاسلكي بالهاتف</li>
+                        <li>تطبيق مجاني للمراقبة</li>
+                        <li>ضمان سنة كاملة</li>
+                    </ul>
+                </div>
+
+                <button class="add-to-cart-btn" data-product="basic" data-price="40">
+                    <span>أضف للسلة</span>
+                    <span>🛒</span>
+                </button>
+
+                <!-- Limited Offer Banner -->
+                <div class="offer-banner">
+                    <div class="offer-icon">🎁</div>
+                    <div class="offer-content">
+                        <strong>عرض لفترة محدودة!</strong>
+                        <p>احصل على شحن مجاني + ضمان إضافي 6 أشهر</p>
+                        <div class="countdown" id="countdown">
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="hours">00</span>
+                                <span class="countdown-label">ساعة</span>
+                            </div>
+                            <span class="countdown-separator">:</span>
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="minutes">00</span>
+                                <span class="countdown-label">دقيقة</span>
+                            </div>
+                            <span class="countdown-separator">:</span>
+                            <div class="countdown-item">
+                                <span class="countdown-value" id="seconds">00</span>
+                                <span class="countdown-label">ثانية</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Form -->
+    <div class="checkout-overlay" id="checkoutOverlay">
+        <div class="checkout-modal">
+            <div class="checkout-header">
+                <h3>إتمام الطلب</h3>
+                <button class="checkout-close" id="checkoutClose">×</button>
+            </div>
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-section">
+                    <h4>معلومات الشحن</h4>
+                    <div class="form-group">
+                        <label>الاسم الكامل *</label>
+                        <input type="text" name="fullName" required placeholder="أدخل اسمك الكامل">
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف *</label>
+                        <input type="tel" name="phone" required placeholder="+968 XXXX XXXX" pattern="[0-9+\s]{8,15}">
+                    </div>
+                    <div class="form-group">
+                        <label>العنوان *</label>
+                        <textarea name="address" required placeholder="المنطقة، المدينة، رقم المبنى" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4>طريقة الدفع</h4>
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="visa" required>
+                            <div class="payment-card">
+                                <span class="payment-icon">💳</span>
+                                <span class="payment-name">Visa</span>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="applepay">
+                            <div class="payment-card">
+                                <span class="payment-icon">💸</span>
+                                <span class="payment-name">Apple Pay</span>
+                            </div>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="paypal">
+                            <div class="payment-card">
+                                <span class="payment-icon">💰</span>
+                                <span class="payment-name">PayPal</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4>ملخص الطلب</h4>
+                    <div class="order-summary" id="orderSummary"></div>
+                    <div class="order-total">
+                        <span>المجموع الكلي:</span>
+                        <span class="final-total" id="finalTotal">0 ر.ع</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-order-btn">
+                    تأكيد الطلب
+                    <span>✓</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sticky Buy Button -->
+    <div class="sticky-buy-bar" id="stickyBuyBar">
+        <div class="sticky-buy-content">
+            <div class="sticky-product-info">
+                <strong>السترة الذكية الأساسية</strong>
+                <span class="sticky-price"><span id="stickyPrice">40</span> <span id="stickyCurrency">ر.ع</span></span>
+            </div>
+            <button class="sticky-buy-btn" onclick="document.querySelector('.add-to-cart-btn').click()">
+                اطلب الآن ←
+            </button>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="section-header">
+            <span class="section-label">آراء العملاء</span>
+            <h2 class="section-title">ماذا يقولو عملاؤنا</h2>
+            <p class="section-description">
+                تجارب حقيقية من عملاء استخدموا السترة الذكية في بيئات العمل
+            </p>
+        </div>
+
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"السترة الذكية غيرت مستوى السلامة في موقعنا بشكل كامل ,  التنبيهات الفورية أنقذت حياة أحد العمال من تسرب غاز خطير."</p>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <strong>أحمد المنصوري</strong>
+                        <span>مدير السلامة - شركة البناء الحديثة</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"استثمار يستحق كل ريال راحة العمال زادت والحوادث انخفضت بنسبة ملحوظة و نظام SOS أساسي لأي موقع عمل."</p>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <strong>فاطمة الكعبي</strong>
+                        <span>مسؤولة الصحة والسلامة - مصنع الإمارات</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"التقنية المتقدمة والسعر المعقول , سنسر نبضات القلب ساعدنا في اكتشاف مشكلة صحية لأحد العمال قبل تفاقمها."</p>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <strong>خالد البلوشي</strong>
+                        <span>مدير عمليات - شركة نفط عمان</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <span class="section-label">الأسئلة الشائعة</span>
+            <h2 class="section-title">أسئلة متكررة</h2>
+            <p class="section-description">
+                إجابات على أكثر الأسئلة شيوعاً حول السترة الذكية
+            </p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>كم تدوم البطارية؟</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>البطارية تدوم حتى 12 ساعة من الاستخدام المتواصل. يمكن شحنها بالكامل في 2-3 ساعات فقط عبر USB-C.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>هل السترة مقاومة للماء؟</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>نعم، السترة حاصلة على تصنيف IP67 مما يعني أنها مقاومة للماء والغبار بشكل كامل وتعمل في جميع الظروف الجوية.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>كيف يعمل زر SOS؟</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>عند الضغط على زر SOS، يتم إرسال إشعار فوري إلى التطبيق المربوط مع موقع GPS الدقيق، ويتم تنبيه المشرفين وفريق الطوارئ.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>هل يوجد تطبيق للهاتف؟</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>نعم، التطبيق متوفر مجاناً لأجهزة iOS و Android. يمكنك من خلاله مراقبة جميع البيانات والحصول على تنبيهات فورية.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>ما هي مدة الضمان؟</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>نوفر ضمان شامل لمدة سنة كاملة يغطي أي عيوب تصنيع. كما نقدم دعم فني مجاني طوال فترة الاستخدام.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>هل يمكن إرجاع المنتج؟</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>نعم، يمكنك إرجاع المنتج خلال 30 يوماً من تاريخ الاستلام واسترداد كامل المبلغ إذا لم تكن راضياً عن المنتج.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
         <div class="cta-container">
@@ -1311,7 +2801,7 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <h3>AmnTech</h3>
-                    <p>نؤمن بأن السلامة حق أساسي لكل عامل. نبتكر حلولاً تقنية متقدمة لحماية الأرواح ورفع معايير السلامة المهنية في المملكة والمنطقة.</p>
+                    <p>نؤمن بأن السلامة حق أساسي لكل عامل نبتكر حلولاً تقنية متقدمة لحماية الأرواح ورفع معايير السلامة المهنية في السلطنة والمنطقة.</p>
                 </div>
 
                 <div class="footer-section">
@@ -1337,28 +2827,40 @@
                 <div class="footer-section">
                     <h4>تواصل معنا</h4>
                     <ul class="footer-links">
-                        <li><a href="mailto:info@amntech.sa">info@amntech.sa</a></li>
+                        <li><a href="/cdn-cgi/l/email-protection#ee87808881ae8f83809a8b8d86c09d8f">AmnTech25@hotmail.com </a></li>
                         <li><a href="tel:+966500000000">+966 50 000 0000</a></li>
-                        <li><a href="#">الرياض، المملكة العربية السعودية</a></li>
+                        <li><a href="#">مسقط , سلطنة عمان</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>© 2026 AmnTech. جميع الحقوق محفوظة | تصميم وتطوير بفخر في المملكة العربية السعودية</p>
+                <p>© 2026 AmnTech. جميع الحقوق محفوظة | تصميم وتطوير الشركة الطلابية في سلطنة عمان</p>
             </div>
-            
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar');
+            const stickyBuyBar = document.getElementById('stickyBuyBar');
+            const productsSection = document.getElementById('products');
+            
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
+            }
+            
+            // Show sticky buy bar after products section
+            if (productsSection && stickyBuyBar) {
+                const productsBottom = productsSection.offsetTop + productsSection.offsetHeight;
+                if (window.scrollY > productsBottom) {
+                    stickyBuyBar.classList.add('visible');
+                } else {
+                    stickyBuyBar.classList.remove('visible');
+                }
             }
         });
 
@@ -1375,6 +2877,250 @@
                 }
             });
         });
+
+        // Shopping Cart Functionality
+        const cart = [];
+
+        // Currency settings
+        let currentCurrency = {
+            code: 'OMR',
+            symbol: 'ر.ع',
+            rate: 1
+        };
+
+        const basePrice = 40; // Base price in OMR
+
+        const products = {
+            basic: { 
+                name: 'السترة الذكية الأساسية', 
+                sensors: 'سنسر الغاز، الأشعة فوق البنفسجية، نبضات القلب، الحرارة، الرطوبة + زر SOS', 
+                price: basePrice 
+            }
+        };
+
+        // Currency selector
+        const currencySelect = document.getElementById('currencySelect');
+        const productPrice = document.getElementById('productPrice');
+        const priceCurrency = document.getElementById('priceCurrency');
+
+        if (currencySelect) {
+            currencySelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                currentCurrency = {
+                    code: this.value,
+                    symbol: selectedOption.dataset.symbol,
+                    rate: parseFloat(selectedOption.dataset.rate)
+                };
+                
+                updatePriceDisplay();
+                updateCart();
+            });
+        }
+
+        function updatePriceDisplay() {
+            const convertedPrice = (basePrice * currentCurrency.rate).toFixed(2);
+            if (productPrice) productPrice.textContent = convertedPrice;
+            if (priceCurrency) priceCurrency.textContent = currentCurrency.symbol;
+            
+            // Update sticky bar price
+            const stickyPrice = document.getElementById('stickyPrice');
+            const stickyCurrency = document.getElementById('stickyCurrency');
+            if (stickyPrice) stickyPrice.textContent = convertedPrice;
+            if (stickyCurrency) stickyCurrency.textContent = currentCurrency.symbol;
+            
+            // Update button price
+            const addBtn = document.querySelector('.add-to-cart-btn');
+            if (addBtn) {
+                addBtn.dataset.price = convertedPrice;
+            }
+        }
+
+        function getConvertedPrice(omrPrice) {
+            return omrPrice * currentCurrency.rate;
+        }
+
+        // Add to cart - Open checkout directly
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = this.dataset.product;
+                const price = parseFloat(this.dataset.price);
+                
+                // Clear cart and add single item
+                cart.length = 0;
+                cart.push({
+                    id: productId,
+                    ...products[productId],
+                    quantity: 1,
+                    price: price
+                });
+                
+                // Open checkout form directly
+                openCheckoutForm();
+            });
+        });
+
+        // Checkout Form
+        const checkoutOverlay = document.getElementById('checkoutOverlay');
+        const checkoutClose = document.getElementById('checkoutClose');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const orderSummary = document.getElementById('orderSummary');
+        const finalTotal = document.getElementById('finalTotal');
+
+        function openCheckoutForm() {
+            cartOverlay.classList.remove('active');
+            checkoutOverlay.classList.add('active');
+            
+            const summaryHTML = cart.map(item => `
+                <div class="summary-item">
+                    <div>
+                        <div class="summary-item-name">${item.name}</div>
+                        <div class="summary-item-details">الكمية: ${item.quantity}</div>
+                    </div>
+                    <div class="summary-item-price">${(item.price * item.quantity).toFixed(2)} ${currentCurrency.symbol}</div>
+                </div>
+            `).join('');
+            
+            orderSummary.innerHTML = summaryHTML;
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            finalTotal.textContent = total.toFixed(2) + ' ' + currentCurrency.symbol;
+        }
+
+        checkoutClose.addEventListener('click', () => {
+            checkoutOverlay.classList.remove('active');
+        });
+
+        checkoutOverlay.addEventListener('click', (e) => {
+            if (e.target === checkoutOverlay) {
+                checkoutOverlay.classList.remove('active');
+            }
+        });
+
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(checkoutForm);
+            const orderData = {
+                name: formData.get('fullName'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                paymentMethod: formData.get('paymentMethod'),
+                items: cart,
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+            };
+            
+            const paymentNames = {'visa': 'Visa', 'applepay': 'Apple Pay', 'paypal': 'PayPal'};
+            
+            alert(`تم تأكيد طلبك بنجاح! ✓\n\nالاسم: ${orderData.name}\nرقم الهاتف: ${orderData.phone}\nطريقة الدفع: ${paymentNames[orderData.paymentMethod]}\n\nالمجموع: ${orderData.total.toFixed(2)} ${currentCurrency.symbol}\n\nسيتم التواصل معك قريباً لتأكيد الطلب والشحن.`);
+            
+            cart.length = 0;
+            updateCart();
+            checkoutOverlay.classList.remove('active');
+            checkoutForm.reset();
+        });
+
+        // Notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 120px;
+                right: 32px;
+                background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                font-weight: 600;
+                box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        // Initialize
+        if (cartCount) cartCount.classList.add('hidden');
+
+        // Countdown Timer (24 hours)
+        function startCountdown() {
+            const countdownDate = new Date().getTime() + (24 * 60 * 60 * 1000);
+            
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                
+                if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+                if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+                if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+                
+                if (distance < 0) {
+                    clearInterval(timer);
+                    if (hoursEl) hoursEl.textContent = "00";
+                    if (minutesEl) minutesEl.textContent = "00";
+                    if (secondsEl) secondsEl.textContent = "00";
+                }
+            }, 1000);
+        }
+        
+        startCountdown();
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const wasActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!wasActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll offset for fixed navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 90; // navbar height
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
+    <style>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(100px); }
+        }
+    </style>
 </body>
 </html>
