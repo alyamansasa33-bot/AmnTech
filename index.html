@@ -3110,5 +3110,133 @@
             to { opacity: 0; transform: translateX(100px); }
         }
     </style>
+    /* =====================
+   RESPONSIVE DESIGN
+===================== */
+
+/* Tablets & Small Laptops */
+@media (max-width: 1024px) {
+
+  .nav-container {
+    padding: 0 40px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 80px 40px;
+  }
+
+  .hero-title {
+    font-size: 56px;
+  }
+
+  .hero-description {
+    margin: 0 auto 40px;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-grid,
+  .products-container,
+  .testimonials-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+
+  .navbar {
+    height: auto;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    height: auto;
+    padding: 16px 24px;
+    gap: 16px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero {
+    margin-top: 120px;
+  }
+
+  .hero-title {
+    font-size: 40px;
+  }
+
+  .hero-description {
+    font-size: 17px;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .categories-section,
+  .products-section,
+  .features-section,
+  .testimonials-section,
+  .faq-section,
+  .cta-section {
+    padding: 80px 24px;
+  }
+
+  .categories-grid,
+  .products-container,
+  .features-grid,
+  .testimonials-container {
+    grid-template-columns: 1fr;
+  }
+
+  .vest-container {
+    width: 320px;
+    height: 320px;
+  }
+
+  .floating-cart-btn {
+    left: 16px;
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+}
+
+/* Very Small Phones */
+@media (max-width: 480px) {
+
+  .hero-title {
+    font-size: 34px;
+  }
+
+  .section-title {
+    font-size: 36px;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-white {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sticky-buy-content {
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
 </body>
 </html>
