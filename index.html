@@ -2487,169 +2487,461 @@
             </p>
         </div>
 
-        <div class="products-container single-product">
-            <!-- Single Product -->
-            <div class="product-card featured">
-                <div class="product-badge">الباقة الأساسية</div>
-                <div class="product-icon">💪️</div>
-                <h3 class="product-name">السترة الذكية الأساسية</h3>
-                <p class="product-sensors">6 تقنيات حماية متقدمة</p>
-                <div class="product-price">
-                    <span class="price-amount" id="productPrice">40</span>
-                    <span class="price-currency" id="priceCurrency">ر.ع</span>
-                </div>
-                
-                <div class="currency-selector">
-                    <label>اختر العملة:</label>
-                    <select id="currencySelect">
-                        <option value="OMR" data-symbol="ر.ع" data-rate="1">الريال العماني (OMR)</option>
-                        <option value="SAR" data-symbol="ريال" data-rate="10">الريال السعودي (SAR)</option>
-                        <option value="AED" data-symbol="درهم" data-rate="9.5">الدرهم الإماراتي (AED)</option>
-                        <option value="USD" data-symbol="$" data-rate="2.6">الدولار الأمريكي (USD)</option>
-                        <option value="EUR" data-symbol="€" data-rate="2.4">اليورو (EUR)</option>
-                    </select>
-                </div>
+        import { useState, useEffect } from 'react';
+import { ShoppingCart, X, Plus, Minus, Trash2, Menu } from 'lucide-react';
 
-                <h4 class="features-title">المميزات والسنسورات:</h4>
-                <ul class="product-features">
-                    <li>
-                        <span class="feature-icon">💨</span>
-                        <strong>سنسر الغاز</strong> - كشف تسرب الغازات الخطرة
-                    </li>
-                    <li>
-                        <span class="feature-icon">☀️</span>
-                        <strong>سنسر الأشعة فوق البنفسجية</strong> - حماية من أشعة الشمس الضارة
-                    </li>
-                    <li>
-                        <span class="feature-icon">❤️</span>
-                        <strong>سنسر نبضات القلب</strong> - مراقبة الحالة الصحية
-                    </li>
-                    <li>
-                        <span class="feature-icon">🌡️</span>
-                        <strong>سنسر الحرارة</strong> - قياس درجة حرارة الجسم والبيئة
-                    </li>
-                    <li>
-                        <span class="feature-icon">💧</span>
-                        <strong>سنسر الرطوبة</strong> - مراقبة مستويات الرطوبة
-                    </li>
-                    <li>
-                        <span class="feature-icon">🆘</span>
-                        <strong>زر الطوارئ SOS</strong> - إرسال إشعار فوري عند الخطر
-                    </li>
-                </ul>
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
 
-                <div class="additional-features">
-                    <h4>مميزات إضافية:</h4>
-                    <ul>
-                        <li>تنبيهات صوتية وضوئية فورية</li>
-                        <li>مقاومة للماء والغبار IP67</li>
-                        <li>بطارية تدوم حتى 12 ساعة</li>
-                        <li>اتصال لاسلكي بالهاتف</li>
-                        <li>تطبيق مجاني للمراقبة</li>
-                        <li>ضمان سنة كاملة</li>
-                    </ul>
-                </div>
+interface Currency {
+  code: string;
+  symbol: string;
+  rate: number;
+}
 
-                <button class="add-to-cart-btn" data-product="basic" data-price="40">
-                    <span>أضف للسلة</span>
-                    <span>🛒</span>
-                </button>
+const currencies: Currency[] = [
+  { code: 'OMR', symbol: 'ر.ع', rate: 1 },
+  { code: 'SAR', symbol: 'ريال', rate: 10 },
+  { code: 'AED', symbol: 'درهم', rate: 9.5 },
+  { code: 'USD', symbol: '$', rate: 2.6 },
+  { code: 'EUR', symbol: '€', rate: 2.4 }
+];
 
-                <!-- Limited Offer Banner -->
-                <div class="offer-banner">
-                    <div class="offer-icon">🎁</div>
-                    <div class="offer-content">
-                        <strong>عرض لفترة محدودة!</strong>
-                        <p>احصل على شحن مجاني + ضمان إضافي 6 أشهر</p>
-                        <div class="countdown" id="countdown">
-                            <div class="countdown-item">
-                                <span class="countdown-value" id="hours">144</span>
-                                <span class="countdown-label">ساعة</span>
-                            </div>
-                            <span class="countdown-separator">:</span>
-                            <div class="countdown-item">
-                                <span class="countdown-value" id="minutes">00</span>
-                                <span class="countdown-label">دقيقة</span>
-                            </div>
-                            <span class="countdown-separator">:</span>
-                            <div class="countdown-item">
-                                <span class="countdown-value" id="seconds">00</span>
-                                <span class="countdown-label">ثانية</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+function App() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [showCart, setShowCart] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [currentCurrency, setCurrentCurrency] = useState<Currency>(currencies[0]);
+  const [scrolled, setScrolled] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+
+  const basePrice = 40;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      const productsSection = document.getElementById('products');
+      if (productsSection) {
+        const productsBottom = productsSection.offsetTop + productsSection.offsetHeight;
+        setShowStickyBar(window.scrollY > productsBottom);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const getConvertedPrice = (omrPrice: number) => {
+    return (omrPrice * currentCurrency.rate).toFixed(2);
+  };
+
+  const addToCart = () => {
+    const convertedPrice = parseFloat(getConvertedPrice(basePrice));
+    const existingItem = cart.find(item => item.id === 'basic');
+
+    if (existingItem) {
+      setCart(cart.map(item =>
+        item.id === 'basic'
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
+    } else {
+      setCart([...cart, {
+        id: 'basic',
+        name: 'السترة الذكية الأساسية',
+        price: convertedPrice,
+        quantity: 1
+      }]);
+    }
+
+    setShowCart(true);
+  };
+
+  const updateQuantity = (id: string, delta: number) => {
+    setCart(cart.map(item => {
+      if (item.id === id) {
+        const newQuantity = Math.max(1, item.quantity + delta);
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
+    }));
+  };
+
+  const removeFromCart = (id: string) => {
+    setCart(cart.filter(item => item.id !== id));
+  };
+
+  const getTotalPrice = () => {
+    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
+  };
+
+  const handleCheckout = () => {
+    setShowCart(false);
+    setShowCheckout(true);
+  };
+
+  const handleSubmitOrder = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(`تم تأكيد طلبك بنجاح! ✓\n\nالمجموع: ${getTotalPrice()} ${currentCurrency.symbol}\n\nسيتم التواصل معك قريباً لتأكيد الطلب والشحن.`);
+    setCart([]);
+    setShowCheckout(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-white" dir="rtl">
+      {/* Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-b z-50 transition-all ${scrolled ? 'shadow-lg' : ''}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
+          <div className="flex items-center justify-between h-20">
+            <a href="#" className="flex items-center gap-4">
+              <div className="w-12 h-14 flex items-center justify-center">
+                <span className="text-4xl">🦺</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-[#0B1F3F]">AmnTech</span>
+                <span className="text-xs text-gray-600 uppercase tracking-wider">Smart Safety</span>
+              </div>
+            </a>
+
+            <button
+              className="lg:hidden p-2"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+
+            <div className={`${showMobileMenu ? 'block' : 'hidden'} lg:flex items-center gap-8 absolute lg:relative top-20 lg:top-0 left-0 right-0 bg-white lg:bg-transparent p-4 lg:p-0 shadow-lg lg:shadow-none`}>
+              <a href="#home" className="block lg:inline-block py-2 lg:py-0 text-[#0B1F3F] hover:text-[#1A73E8] font-medium">الرئيسية</a>
+              <a href="#categories" className="block lg:inline-block py-2 lg:py-0 text-[#0B1F3F] hover:text-[#1A73E8] font-medium">العملاء</a>
+              <a href="#products" className="block lg:inline-block py-2 lg:py-0 text-[#0B1F3F] hover:text-[#1A73E8] font-medium">المنتج</a>
+              <a href="#features" className="block lg:inline-block py-2 lg:py-0 text-[#0B1F3F] hover:text-[#1A73E8] font-medium">المزايا</a>
             </div>
+          </div>
         </div>
-    </section>
+      </nav>
 
-    <!-- Checkout Form -->
-    <div class="checkout-overlay" id="checkoutOverlay">
-        <div class="checkout-modal">
-            <div class="checkout-header">
-                <h3>إتمام الطلب</h3>
-                <button class="checkout-close" id="checkoutClose">×</button>
+      {/* Floating Cart Button */}
+      <button
+        onClick={() => setShowCart(true)}
+        className="fixed top-24 left-4 lg:left-8 w-14 h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-[#1A73E8] to-[#4285F4] text-white rounded-full shadow-lg hover:scale-110 transition-transform z-40 flex items-center justify-center"
+      >
+        <ShoppingCart className="w-6 h-6 lg:w-7 lg:h-7" />
+        {cart.length > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 lg:w-7 lg:h-7 rounded-full text-xs lg:text-sm font-bold flex items-center justify-center border-2 border-white">
+            {cart.reduce((sum, item) => sum + item.quantity, 0)}
+          </span>
+        )}
+      </button>
+
+      {/* Hero Section */}
+      <section id="home" className="pt-24 lg:pt-32 pb-12 lg:pb-20 px-4 sm:px-6 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div className="text-center lg:text-right">
+              <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-4 lg:px-5 py-2 rounded-full text-[#1A73E8] text-sm font-semibold mb-6 lg:mb-8">
+                <span>✦</span>
+                <span>تقنية عمانية مبتكرة</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-black leading-tight mb-4 lg:mb-6">
+                السترة <span className="bg-gradient-to-r from-[#1A73E8] to-[#4285F4] bg-clip-text text-transparent">الذكية</span><br/>
+                للسلامة المهنية
+              </h1>
+
+              <p className="text-lg lg:text-xl text-gray-700 mb-8 lg:mb-12 leading-relaxed">
+                في AmnTech نطور حلول السلامة الذكية تخدم مختلف فئات المجتمع. منتجنا الرئيسي، سترة السلامة الذكية، صُممت لحماية العمال في مواقع العمل الخطرة.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 lg:mb-12">
+                <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 lg:p-6 text-center hover:bg-blue-100 transition-all">
+                  <div className="text-3xl lg:text-5xl font-bold text-[#1A73E8] mb-2">90%</div>
+                  <div className="text-sm lg:text-base text-gray-700">تقليل الحوادث</div>
+                </div>
+                <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 lg:p-6 text-center hover:bg-blue-100 transition-all">
+                  <div className="text-3xl lg:text-5xl font-bold text-[#1A73E8] mb-2">90%</div>
+                  <div className="text-sm lg:text-base text-gray-700">زيادة الوعي</div>
+                </div>
+                <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 lg:p-6 text-center hover:bg-blue-100 transition-all">
+                  <div className="text-3xl lg:text-5xl font-bold text-[#1A73E8] mb-2">90%</div>
+                  <div className="text-sm lg:text-base text-gray-700">راحة الاستخدام</div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a href="#products" className="bg-gradient-to-r from-[#1A73E8] to-[#4285F4] text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all inline-flex items-center justify-center gap-2">
+                  <span>اطلب الآن</span>
+                  <span>←</span>
+                </a>
+                <a href="#features" className="bg-white border-2 border-[#1A73E8] text-[#1A73E8] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[#1A73E8] hover:text-white transition-all">
+                  المزايا التقنية
+                </a>
+              </div>
             </div>
-            <form class="checkout-form" id="checkoutForm">
-                <div class="form-section">
-                    <h4>معلومات الشحن</h4>
-                    <div class="form-group">
-                        <label>الاسم الكامل *</label>
-                        <input type="text" name="fullName" required placeholder="أدخل اسمك الكامل">
-                    </div>
-                    <div class="form-group">
-                        <label>رقم الهاتف *</label>
-                        <input type="tel" name="phone" required placeholder="+968 XXXX XXXX" pattern="[0-9+\s]{8,15}">
-                    </div>
-                    <div class="form-group">
-                        <label>العنوان *</label>
-                        <textarea name="address" required placeholder="المنطقة، المدينة، رقم المبنى" rows="3"></textarea>
-                    </div>
-                </div>
 
-                <div class="form-section">
-                    <h4>طريقة الدفع</h4>
-                    <div class="payment-methods">
-                        <label class="payment-option">
-                            <input type="radio" name="paymentMethod" value="visa" required>
-                            <div class="payment-card">
-                                <span class="payment-icon">💳</span>
-                                <span class="payment-name">Visa</span>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="paymentMethod" value="applepay">
-                            <div class="payment-card">
-                                <span class="payment-icon">💸</span>
-                                <span class="payment-name">Apple Pay</span>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="paymentMethod" value="paypal">
-                            <div class="payment-card">
-                                <span class="payment-icon">💰</span>
-                                <span class="payment-name">PayPal</span>
-                            </div>
-                        </label>
-                    </div>
-                </div>
+            <div className="flex justify-center">
+              <div className="text-9xl lg:text-[200px] animate-bounce">🦺</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <div class="form-section">
-                    <h4>ملخص الطلب</h4>
-                    <div class="order-summary" id="orderSummary"></div>
-                    <div class="order-total">
-                        <span>المجموع الكلي:</span>
-                        <span class="final-total" id="finalTotal">0 ر.ع</span>
-                    </div>
-                </div>
+      {/* Products Section */}
+      <section id="products" className="py-12 lg:py-20 px-4 sm:px-6 lg:px-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8 lg:mb-16">
+            <span className="text-[#1A73E8] text-sm font-bold uppercase tracking-widest mb-4 block">المنتج</span>
+            <h2 className="text-3xl lg:text-5xl font-bold text-black mb-4 lg:mb-6">السترة الذكية للسلامة المهنية</h2>
+            <p className="text-lg lg:text-xl text-gray-600">حماية شاملة مع تقنيات متقدمة لضمان سلامتك في بيئة العمل</p>
+          </div>
 
-                <button type="submit" class="submit-order-btn">
-                    تأكيد الطلب
-                    <span>✓</span>
+          <div className="bg-white rounded-3xl p-6 lg:p-12 border-2 border-[#1A73E8] shadow-xl">
+            <div className="text-center mb-8">
+              <div className="inline-block bg-[#1A73E8] text-white px-4 py-2 rounded-full text-sm font-bold mb-6">الباقة الأساسية</div>
+              <div className="text-7xl lg:text-8xl mb-6">💪</div>
+              <h3 className="text-2xl lg:text-3xl font-bold mb-2">السترة الذكية الأساسية</h3>
+              <p className="text-[#1A73E8] font-semibold mb-6">6 تقنيات حماية متقدمة</p>
+
+              <div className="text-4xl lg:text-6xl font-bold text-[#1A73E8] mb-6">
+                <span>{getConvertedPrice(basePrice)}</span>
+                <span className="text-xl lg:text-2xl text-gray-600 mr-2">{currentCurrency.symbol}</span>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-4 lg:p-6 mb-8">
+                <label className="block font-semibold text-black mb-3">اختر العملة:</label>
+                <select
+                  value={currentCurrency.code}
+                  onChange={(e) => setCurrentCurrency(currencies.find(c => c.code === e.target.value) || currencies[0])}
+                  className="w-full p-3 lg:p-4 border-2 border-gray-300 rounded-lg text-base focus:border-[#1A73E8] focus:outline-none"
+                >
+                  {currencies.map(currency => (
+                    <option key={currency.code} value={currency.code}>
+                      {currency.code === 'OMR' && 'الريال العماني (OMR)'}
+                      {currency.code === 'SAR' && 'الريال السعودي (SAR)'}
+                      {currency.code === 'AED' && 'الدرهم الإماراتي (AED)'}
+                      {currency.code === 'USD' && 'الدولار الأمريكي (USD)'}
+                      {currency.code === 'EUR' && 'اليورو (EUR)'}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="text-right mb-8">
+              <h4 className="text-xl lg:text-2xl font-bold mb-4">المميزات والسنسورات:</h4>
+              <ul className="space-y-3">
+                {[
+                  { icon: '💨', title: 'سنسر الغاز', desc: 'كشف تسرب الغازات الخطرة' },
+                  { icon: '☀️', title: 'سنسر الأشعة فوق البنفسجية', desc: 'حماية من أشعة الشمس الضارة' },
+                  { icon: '❤️', title: 'سنسر نبضات القلب', desc: 'مراقبة الحالة الصحية' },
+                  { icon: '🌡️', title: 'سنسر الحرارة', desc: 'قياس درجة حرارة الجسم والبيئة' },
+                  { icon: '💧', title: 'سنسر الرطوبة', desc: 'مراقبة مستويات الرطوبة' },
+                  { icon: '🆘', title: 'زر الطوارئ SOS', desc: 'إرسال إشعار فوري عند الخطر' }
+                ].map((feature, index) => (
+                  <li key={index} className="flex items-start gap-3 p-3 lg:p-4 border-b border-gray-200 last:border-0">
+                    <span className="text-2xl lg:text-3xl">{feature.icon}</span>
+                    <div>
+                      <strong className="text-black text-base lg:text-lg">{feature.title}</strong>
+                      <span className="text-gray-600 text-sm lg:text-base"> - {feature.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              onClick={addToCart}
+              className="w-full bg-gradient-to-r from-[#1A73E8] to-[#4285F4] text-white px-8 py-4 lg:py-5 rounded-xl font-bold text-lg lg:text-xl shadow-lg hover:shadow-2xl transition-all flex items-center justify-center gap-3"
+            >
+              <span>أضف للسلة</span>
+              <ShoppingCart className="w-5 h-5 lg:w-6 lg:h-6" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="py-12 lg:py-20 px-4 sm:px-6 lg:px-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 lg:mb-16">
+            <span className="text-[#1A73E8] text-sm font-bold uppercase tracking-widest mb-4 block">المزايا التقنية</span>
+            <h2 className="text-3xl lg:text-5xl font-bold text-black mb-4 lg:mb-6">لماذا السترة الذكية من AmnTech؟</h2>
+            <p className="text-lg lg:text-xl text-gray-600">تقنية متطورة ومميزات فريدة تجعلنا الخيار الأول للسلامة المهنية</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              { icon: '🎯', title: 'دقة عالية في الكشف', desc: 'سنسرات متطورة توفر دقة استثنائية في اكتشاف المخاطر' },
+              { icon: '💪', title: 'متانة استثنائية', desc: 'مواد عالية الجودة مقاومة للظروف القاسية' },
+              { icon: '🌡️', title: 'مراقبة مستمرة 24/7', desc: 'نظام ذكي لمراقبة الحالة الصحية على مدار الساعة' },
+              { icon: '📊', title: 'تقارير وتحليلات', desc: 'بيانات دقيقة وتقارير شاملة لتحسين السلامة' },
+              { icon: '🔋', title: 'بطارية طويلة الأمد', desc: 'تقنية إدارة طاقة ذكية لعمل متواصل' },
+              { icon: '🌐', title: 'اتصال سحابي', desc: 'تكامل سلس مع الأنظمة السحابية' }
+            ].map((feature, index) => (
+              <div key={index} className="bg-white p-6 lg:p-8 rounded-2xl text-center hover:shadow-xl transition-all border border-gray-200">
+                <div className="text-5xl lg:text-6xl mb-4">{feature.icon}</div>
+                <h3 className="text-lg lg:text-xl font-bold mb-3">{feature.title}</h3>
+                <p className="text-gray-600 text-sm lg:text-base leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Shopping Cart Modal */}
+      {showCart && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowCart(false)}>
+          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-6 lg:p-8 border-b">
+              <h3 className="text-2xl lg:text-3xl font-bold">سلة التسوق</h3>
+              <button onClick={() => setShowCart(false)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <X className="w-6 h-6 lg:w-8 lg:h-8" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6 lg:p-8">
+              {cart.length === 0 ? (
+                <div className="text-center py-12 lg:py-16">
+                  <ShoppingCart className="w-16 h-16 lg:w-20 lg:h-20 mx-auto mb-4 text-gray-300" />
+                  <p className="text-gray-500 text-lg">السلة فارغة</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {cart.map(item => (
+                    <div key={item.id} className="bg-gray-50 rounded-2xl p-4 lg:p-6 flex items-center gap-4">
+                      <div className="flex-1">
+                        <div className="font-bold text-base lg:text-lg mb-1">{item.name}</div>
+                        <div className="text-[#1A73E8] font-semibold">{item.price} {currentCurrency.symbol}</div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 lg:w-10 lg:h-10 border-2 border-[#1A73E8] text-[#1A73E8] rounded-lg hover:bg-[#1A73E8] hover:text-white transition-colors flex items-center justify-center">
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <span className="font-bold w-8 text-center">{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, 1)} className="w-8 h-8 lg:w-10 lg:h-10 border-2 border-[#1A73E8] text-[#1A73E8] rounded-lg hover:bg-[#1A73E8] hover:text-white transition-colors flex items-center justify-center">
+                          <Plus className="w-4 h-4" />
+                        </button>
+                        <button onClick={() => removeFromCart(item.id)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {cart.length > 0 && (
+              <div className="border-t p-6 lg:p-8">
+                <div className="flex items-center justify-between mb-6 text-lg lg:text-xl">
+                  <span className="font-semibold">المجموع:</span>
+                  <span className="text-2xl lg:text-3xl font-bold text-[#1A73E8]">{getTotalPrice()} {currentCurrency.symbol}</span>
+                </div>
+                <button
+                  onClick={handleCheckout}
+                  className="w-full bg-gradient-to-r from-[#1A73E8] to-[#4285F4] text-white px-8 py-4 lg:py-5 rounded-xl font-bold text-lg lg:text-xl shadow-lg hover:shadow-2xl transition-all"
+                >
+                  إتمام الطلب ✓
                 </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Checkout Modal */}
+      {showCheckout && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto" onClick={() => setShowCheckout(false)}>
+          <div className="bg-white rounded-3xl max-w-3xl w-full my-8" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-6 lg:p-8 border-b sticky top-0 bg-white rounded-t-3xl">
+              <h3 className="text-2xl lg:text-3xl font-bold">إتمام الطلب</h3>
+              <button onClick={() => setShowCheckout(false)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <X className="w-6 h-6 lg:w-8 lg:h-8" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmitOrder} className="p-6 lg:p-8 space-y-6">
+              <div>
+                <h4 className="text-xl font-bold mb-4 pb-3 border-b-2 border-[#1A73E8]">معلومات الشحن</h4>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block font-semibold mb-2">الاسم الكامل *</label>
+                    <input type="text" required className="w-full p-3 lg:p-4 border-2 border-gray-300 rounded-xl focus:border-[#1A73E8] focus:outline-none" placeholder="أدخل اسمك الكامل" />
+                  </div>
+                  <div>
+                    <label className="block font-semibold mb-2">رقم الهاتف *</label>
+                    <input type="tel" required className="w-full p-3 lg:p-4 border-2 border-gray-300 rounded-xl focus:border-[#1A73E8] focus:outline-none" placeholder="+968 XXXX XXXX" />
+                  </div>
+                  <div>
+                    <label className="block font-semibold mb-2">العنوان *</label>
+                    <textarea required className="w-full p-3 lg:p-4 border-2 border-gray-300 rounded-xl focus:border-[#1A73E8] focus:outline-none" rows={3} placeholder="المنطقة، المدينة، رقم المبنى"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-xl font-bold mb-4 pb-3 border-b-2 border-[#1A73E8]">طريقة الدفع</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {['Visa 💳', 'Apple Pay 💸', 'PayPal 💰'].map((method, index) => (
+                    <label key={index} className="cursor-pointer">
+                      <input type="radio" name="payment" value={method} required className="peer hidden" />
+                      <div className="p-4 lg:p-6 border-2 border-gray-300 rounded-xl text-center peer-checked:border-[#1A73E8] peer-checked:bg-blue-50 hover:border-[#1A73E8] transition-all">
+                        <div className="text-3xl lg:text-4xl mb-2">{method.split(' ')[1]}</div>
+                        <div className="font-semibold text-sm lg:text-base">{method.split(' ')[0]}</div>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-2xl p-6 lg:p-8">
+                <div className="flex items-center justify-between text-lg lg:text-xl mb-2">
+                  <span className="font-semibold">المجموع الكلي:</span>
+                  <span className="text-2xl lg:text-4xl font-bold text-[#1A73E8]">{getTotalPrice()} {currentCurrency.symbol}</span>
+                </div>
+              </div>
+
+              <button type="submit" className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 lg:py-5 rounded-xl font-bold text-lg lg:text-xl shadow-lg hover:shadow-2xl transition-all">
+                تأكيد الطلب ✓
+              </button>
             </form>
+          </div>
         </div>
+      )}
+
+      {/* Sticky Buy Bar */}
+      {showStickyBar && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-[#1A73E8] shadow-2xl z-40 transition-transform">
+          <div className="max-w-7xl mx-auto px-4 py-3 lg:py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="text-center sm:text-right">
+              <div className="font-bold text-sm lg:text-base">السترة الذكية الأساسية</div>
+              <div className="text-xl lg:text-2xl font-bold text-[#1A73E8]">{getConvertedPrice(basePrice)} {currentCurrency.symbol}</div>
+            </div>
+            <button onClick={addToCart} className="w-full sm:w-auto bg-gradient-to-r from-[#1A73E8] to-[#4285F4] text-white px-6 lg:px-10 py-3 rounded-lg font-bold hover:shadow-xl transition-all">
+              اطلب الآن ←
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300 py-12 lg:py-16 px-4 sm:px-6 lg:px-20">
+        <div className="max-w-7xl mx-auto text-center">
+          <h3 className="text-2xl lg:text-4xl font-bold text-white mb-4">AmnTech</h3>
+          <p className="text-base lg:text-lg mb-6 max-w-2xl mx-auto">نؤمن بأن السلامة حق أساسي لكل عامل. نبتكر حلولاً تقنية متقدمة لحماية الأرواح ورفع معايير السلامة المهنية.</p>
+          <p className="text-sm text-gray-500">© 2026 AmnTech. جميع الحقوق محفوظة</p>
+        </div>
+      </footer>
     </div>
+  );
+}
+
+export default App;
 
     <!-- Sticky Buy Button -->
     <div class="sticky-buy-bar" id="stickyBuyBar">
